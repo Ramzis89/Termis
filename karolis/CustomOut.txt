@@ -1,0 +1,1 @@
+{"content" : "21.19°C Karolio\n24.44°C\n07:22:21","refresh_frequency":1,"vibrate":0}

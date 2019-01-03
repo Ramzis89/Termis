@@ -1,0 +1,4 @@
+RELAY-A1B2C3D4:Fake:M|OFF
+ADC-A1B2C3D4:El.Suvartojimas:1
+SLEGIS:Slėgis:1
+TEMP:Temperatūra:1

@@ -1,0 +1,2 @@
+T
+{"content" : "verte{28EE0F6A1F16022F}°C Karolio\nverte{28FFF259B41603A0}°C\nlaikas{28EE0F6A1F16022F}","refresh_frequency":1,"vibrate":0}
