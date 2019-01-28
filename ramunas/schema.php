@@ -116,11 +116,49 @@
 <body>
 <?php
 
-$handle = fopen("./esp1.txt", "r");
-$Values_text = fread($handle, filesize("esp1.txt")+1024);
-fclose($handle);
+    include('var.php');
+    $servername = $SERVER_NAME;
+    $username = $SERVER_USER;
+    $password = $SERVER_PASSWORD;
+    $dbname = $SERVER_DBNAME;
 
-$Values = explode("\n", $Values_text);
+    $UserID = 1;
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        //die("Connection failed: " . $conn->connect_error);
+    } 
+$usr = $_SESSION["usr"];
+
+if(strlen($usr) === 0)
+{
+    $str_tmp = explode('/',$_SERVER['REQUEST_URI']);
+    $usr = $str_tmp[1];
+}
+//---------------------------------------------------------------------------------------------
+//-----------------------Nuskaitom is duombazes------------------------------------------------
+$sql = "SELECT ID, Name FROM Users WHERE Name = '".$usr."'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0)
+{
+  $row = $result->fetch_assoc();
+  //echo $row["ID"]."-".$row["Name"];
+  $sql = "SELECT Address, Value, Date FROM Termometrai WHERE ID = ".$row["ID"];
+  $result = $conn->query($sql);
+
+  if ($result->num_rows > 0)
+  {
+     $num = 0;
+     while($row = $result->fetch_assoc())
+     {
+        $Values[$num] = $row["Address"]."|".$row["Value"]."|".date('Y-m-d H:i', $row["Date"]);
+        $num++;
+     }
+  }
+}
+//---------------------------------------------------------------------------------------------
 $laikas = 0;
 $val1 = 0;
 $val2 = 0;
@@ -137,7 +175,7 @@ $val12 = 0;
 $val13 = 0;
 $val14 = 0;
 
-for($i = 0; $i < count($Values)-1; $i++)
+for($i = 0; $i < count($Values); $i++)
 {
   $Value = explode("|", $Values[$i]);
        if($Value[0] == "28EE92811F1602A9" && $val1 == 0) $val1 = number_format($Value[1], 1)."C";//Pečiaus išeinamas

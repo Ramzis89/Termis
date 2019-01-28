@@ -75,14 +75,15 @@ if($line === false)
 	continue;
 }
 
-
 $dat_split = explode("|", $line);//[count($data)-2]
 $min1 = $dat_split[0];
 $max1 = $dat_split[0];
 //---------------------------------------------
 //$time_start = microtime_float();
 if(((intval(strtotime($season_time)) - $end) < 120) && ($end - $start - 24*3600 < 120))
-{fseek($fp, -30000, SEEK_END);
+{
+  if(filesize($file) > 30000)
+    fseek($fp, -30000, SEEK_END);
 }
 //---------------------------------------------
 $file_count = 0;
@@ -90,7 +91,7 @@ if (true) {//count($data) > 1
    while($line !== false)
    {
       $dat_split = explode("|", $line);
-      
+      //echo $line;
       if($dat_split[1] > $start && $dat_split[1] < $end)
       {
         $min1 = $dat_split[0];
@@ -121,6 +122,9 @@ if (count($data) > 1) {
         $j = $j + 1;
       }
    }
+   $dat_split = explode("|", $data[count($data)-1]);
+   $lasty = $dat_split[0];
+   $lastx = $dat_split[1];
    unset($data);
    //------------Triuksmo salinimas----------------
   for($cnt = 2; $cnt < count($datay0)-3; $cnt++)
@@ -173,9 +177,11 @@ for($cnt = 0; $cnt < $array_size-$vidur; $cnt++)
    }
    $datay0[$array_size-$cnt] /= $vidur+1;
 }
+$datax[$array_size+3] = $lastx;
+$datay0[$array_size+3] = $lasty;
 //------------------------------------------------
 echo "var Failas".$file_i." = [";
-for($i=0; $i < $array_size+2; $i++)
+for($i=0; $i < $array_size+4; $i++)
 {
 echo "['".date('Y-m-d H:i:s', $datax[$i])."',".$datay0[$i]."],";
 }

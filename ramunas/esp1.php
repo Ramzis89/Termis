@@ -65,6 +65,7 @@ if($pos0 !== false)
   {
     //Nuskaito adresa
     $address = substr($param0, $pos0+1, $pos1-$pos0-1);
+    $address = strtoupper($address);
     //Jei ID -> neissaugoti
     if($address === "ID")
     {

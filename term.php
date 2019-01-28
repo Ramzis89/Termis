@@ -168,7 +168,7 @@ $season_time = "+0 hour";
 //-------------------------------------------
 
 $season_time_yesterday = $season_time.' -1 day';
-$graph_time = date('Y-m-d', intval(strtotime($season_time_yesterday)))."T".date('H:i', intval(strtotime($season_time_yesterday)));
+$graph_time = date('Y-m-d', intval(strtotime($season_time_yesterday)))."T".date('H:i:s', intval(strtotime($season_time_yesterday)));
 
 $param0 = 0.12;
 $param0 = $_GET['DS'];
@@ -192,7 +192,7 @@ if ($result->num_rows > 0)
      $num = 0;
      while($row = $result->fetch_assoc())
      {
-        $devices[$num] = $row["Address"]."|".$row["Value"]."|".date('Y-m-d H:i', $row["Date"]);
+        $devices[$num] = $row["Address"]."|".$row["Value"]."|".date('Y-m-d H:i:s', $row["Date"]);
         $num++;
      }
   }
