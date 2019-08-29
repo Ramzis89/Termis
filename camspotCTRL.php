@@ -4,7 +4,10 @@ $security = 0;
 
 if($_GET["psw"] == "apsauga123")
    $security = 1;
-   
+   include('var.php');
+    $username = $USER;
+    $password = $PASS;
+    
    if($security == 0)
    {
 if (!isset($_SERVER['PHP_AUTH_USER'])) {
@@ -13,7 +16,7 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
     echo 'Text to send if user hits Cancel button';
     exit;
 } else {
-			if(($_SERVER['PHP_AUTH_PW'] == "ramzis891") && ($_SERVER['PHP_AUTH_USER'] == "admin"))
+			if(($_SERVER['PHP_AUTH_PW'] == $password) && ($_SERVER['PHP_AUTH_USER'] == $username))
 			{
 				$security = 1;
 			}
@@ -30,13 +33,13 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
 		$command = $_GET["command"];
 
 		if($command== "left")
-			$output = shell_exec("wget -q \"http://192.168.0.101:16319/decoder_control.cgi?user=admin&pwd=ramzis891&command=4&onestep=5\" -O /home/pi/motion/camspot.txt");
+			$output = shell_exec("wget -q \"http://192.168.0.101:16319/decoder_control.cgi?user=admin&pwd=."$password".&command=4&onestep=5\" -O /home/pi/motion/camspot.txt");
 		if($command== "right")
-			$output = shell_exec("wget -q \"http://192.168.0.101:16319/decoder_control.cgi?user=admin&pwd=ramzis891&command=6&onestep=5\" -O /home/pi/motion/camspot.txt");
+			$output = shell_exec("wget -q \"http://192.168.0.101:16319/decoder_control.cgi?user=admin&pwd=."$password".&command=6&onestep=5\" -O /home/pi/motion/camspot.txt");
 		if($command== "up")
-			$output = shell_exec("wget -q \"http://192.168.0.101:16319/decoder_control.cgi?user=admin&pwd=ramzis891&command=0&onestep=5\" -O /home/pi/motion/camspot.txt");
+			$output = shell_exec("wget -q \"http://192.168.0.101:16319/decoder_control.cgi?user=admin&pwd=."$password".&command=0&onestep=5\" -O /home/pi/motion/camspot.txt");
 		if($command== "down")
-			$output = shell_exec("wget -q \"http://192.168.0.101:16319/decoder_control.cgi?user=admin&pwd=ramzis891&command=2&onestep=5\" -O /home/pi/motion/camspot.txt");
+			$output = shell_exec("wget -q \"http://192.168.0.101:16319/decoder_control.cgi?user=admin&pwd=."$password".&command=2&onestep=5\" -O /home/pi/motion/camspot.txt");
 		
 	}
 //var PTZ_UP=0;

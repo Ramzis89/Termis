@@ -4,7 +4,9 @@ $security = 0;
 
 if($_GET["psw"] == "apsauga123")
    $security = 1;
-   
+   include('var.php');
+    $username = $USER;
+    $password = $PASS;
    if($security == 0)
    {
 
@@ -14,7 +16,7 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
     echo 'Text to send if user hits Cancel button';
     exit;
 } else {
-    if(($_SERVER['PHP_AUTH_PW'] == "ramzis891") && ($_SERVER['PHP_AUTH_USER'] == "admin"))
+    if(($_SERVER['PHP_AUTH_PW'] == $password) && ($_SERVER['PHP_AUTH_USER'] == $username))
     			{
 				$security = 1;
 			}
