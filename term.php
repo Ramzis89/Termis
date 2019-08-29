@@ -12,7 +12,6 @@ $sec = "60";
 { margin: 0; padding: 0; }
 
     html { 
-        background: url('background.jpg') no-repeat center center fixed; 
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -20,13 +19,12 @@ $sec = "60";
     }
 
 .WRAPPER {
-    background-color: #9100;
+    background-color: #0000;
     height: 575px;
     width: 975px;
-    background-image: background.jpg);
     top: auto;
     margin: -8px;
-    
+    color:black;
 }
 
 input[type=submit]:hover {
@@ -93,12 +91,12 @@ th, td {
     padding: 6px;
 }
 
-tr:nth-child(even) {background: #4CAF50}
-tr:nth-child(odd) {background: #449d48}
+tr:nth-child(even) {background: #F5F5F5}
+tr:nth-child(odd) {background: #EEEEEE}
 
 
 th {
-    color: white;
+    color: #545353;
 }
 
 ul {
@@ -106,7 +104,7 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #2f6a31;
+    background-color: #77D2FF;
 }
 
 li {
@@ -124,7 +122,7 @@ li a {
 }
 
 li a:hover {
-    background-color: #1f4720;
+    background-color: #27B7FE;
 }
 
 </style>
@@ -207,7 +205,7 @@ if ($result->num_rows > 0)
 <table>
 
   
-  <tr bgcolor=\"#FF0000\">
+  <tr bgcolor=\"#FF00F0\">
           <th> Adresas </th>
           <th> Pavadinimas </th>
           <th> Vertė </th>
@@ -235,9 +233,9 @@ if ($result->num_rows > 0)
       $time = strtotime($season_time) - strtotime($dat_split[2]);
       $spalva = "";
       if($time < 120)
-        $spalva = "white";
+        $spalva = "#545353";
       else
-       $spalva = "brown";
+       $spalva = "#bfbfbf";
       
       $NewName = strpos($vardas, "Be vardo");
       if($NewName !== false)
@@ -306,6 +304,12 @@ if ($result->num_rows > 0)
       }
       else if(strpos($dat_split[0], "ADC") !== false)
        $dat_split[1] = $dat_split[1]." mV";
+      else if(strpos($dat_split[0], "SLEGIS") !== false)
+       $dat_split[1] = $dat_split[1]." hPa";
+      else if(strpos($dat_split[0], "DIST") !== false)
+       $dat_split[1] = $dat_split[1]." cm";
+      else if(strpos($dat_split[0], "HUM") !== false)
+       $dat_split[1] = $dat_split[1]."% RH";
       else
         $dat_split[1] = number_format($dat_split[1], 1, ",", "")." °C";
         
@@ -332,16 +336,16 @@ if ($result->num_rows > 0)
      //Prie vardo pridedam ESP id
      //$dat_split[0] = "<div class=\"tooltip\">".$dat_split[0]."<span class=\"tooltiptext\">".$dat_split[3]."</span></div>";
      
-     echo "<tr> <th>".$dat_split[0]."</th> 
-     <th ".$NewName.">".$vardas."</th>
-     <th>".$dat_split[1]."</th>
+     echo "<tr> <th><font color=\"$spalva\">".$dat_split[0]."</font></th> 
+     <th ".$NewName."><font color=\"$spalva\">".$vardas."</font></th>
+     <th><font color=\"$spalva\">".$dat_split[1]."</font></th>
      <th><font color=\"$spalva\">".$dat_split[2]."</font></th>
-     <th>".$grafikas_enable."</th></tr>";
+     <th><font color=\"$spalva\">".$grafikas_enable."</font></th></tr>";
    }
 }
   echo "</table><br></div>";
   if (file_exists("./".$usr."/schema.php") == true)
-  echo "<iframe src=\"/".$usr."/schema.php\" height=\"800\" width=\"1100\" frameBorder=\"0\" scrolling=\"no\" align=\"middle\"></iframe>";
+  echo "<iframe src=\"/".$usr."/schema.php\" height=\"350\" width=\"1100\" frameBorder=\"0\" scrolling=\"no\" align=\"middle\"></iframe>";
  // <form method=\"get\" action=\"./esp12.php\">
  //   <input type=\"submit\" value=\"Redaguoti\">
 //</form>  

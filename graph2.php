@@ -224,7 +224,7 @@ $max = floor(($max / 5)+1) * 5;
           renderer:$.jqplot.DateAxisRenderer,
           tickOptions:{
           formatString:'%Y-%m-%d %H:%M:%S',
-                textColor: '#ffffff'
+                textColor: '#545353'
                 },
         },
         yaxis:{";

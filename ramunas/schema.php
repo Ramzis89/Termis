@@ -180,7 +180,7 @@ for($i = 0; $i < count($Values); $i++)
   $Value = explode("|", $Values[$i]);
        if($Value[0] == "28EE92811F1602A9" && $val1 == 0) $val1 = number_format($Value[1], 1)."C";//Pečiaus išeinamas
   else if($Value[0] == "28FF1742C01604F6" && $val2 == 0) $val2 = number_format($Value[1], 1)."C";//Pečiaus grįžtamas
-  else if($Value[0] == "cold-C7268D6A" && $val3 == 0) $val3 = number_format($Value[1], 1)."C";//Kaminas
+  else if($Value[0] == "COLD" && $val3 == 0) $val3 = number_format($Value[1], 1)."C";//Kaminas
   else if($Value[0] == "28FFDF61C21603DE" && $val4 == 0) $val4 = "Lauke: ".number_format($Value[1], 1)." C";//Lauke
   else if($Value[0] == "28FF855FC21603AB" && $val5 == 0) $val5 = number_format($Value[1], 1)."C";//Boileris
   else if($Value[0] == "28FFC67BC2160372" && $val6 == 0) $val6 = number_format($Value[1], 1)."C";//Grindinio griztamas
@@ -188,9 +188,9 @@ for($i = 0; $i < count($Values); $i++)
   else if($Value[0] == "28EE1EF31F16010E" && $val8 == 0) $val8 = "Namie: ".number_format($Value[1], 1)."C";//Namie
   else if($Value[0] == "SLEGIS" && $val9 == 0) $val9 = "Slegis: ".number_format($Value[1], 1)."hPa";//Slegis
   else if($Value[0] == "28FFC67FC216037C" && $val10 == 0) $val10 = "Katilineje: ".number_format($Value[1], 1)."C";//Katilineje
-  else if($Value[0] == "28FF593763170442" && $val11 == 0) $val11 = number_format($Value[1], 1)."C";//Kolektorius
-  else if($Value[0] == "28ff86c961170458" && $val12 == 0) $val12 = "Oras: ".number_format($Value[1], 1)."C";//Šiltnamio oras
-  else if($Value[0] == "28ff77f862170410" && $val13 == 0) $val13 = "Žemė: ".number_format($Value[1], 1)."C";//Šiltnamio žemė
+  else if($Value[0] == "28FF233863170408" && $val11 == 0) $val11 = number_format($Value[1], 1)."C";//Kolektorius
+  else if($Value[0] == "28FF86C961170458" && $val12 == 0) $val12 = "Oras: ".number_format($Value[1], 1)."C";//Šiltnamio oras
+  else if($Value[0] == "28FF77F862170410" && $val13 == 0) $val13 = "Žemė: ".number_format($Value[1], 1)."C";//Šiltnamio žemė
   else if($Value[0] == "OutputPWM" && $val14 == 0) $val14 = number_format($Value[1]/1024*100, 0)."%";//PWM išėjimas
   if($laikas == 0) $laikas = $Value[2];
 }  

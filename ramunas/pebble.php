@@ -15,6 +15,8 @@ $date->setTimezone(new DateTimeZone('Europe/Vilnius'));
 $season_time = $date->format('P')." hour";
 $season_time = substr($season_time, 2, 1);
 
+$hours = $season_time;
+
 //$time_start = microtime_float();
 //$season_time/100
 
@@ -27,6 +29,7 @@ else
   $hours = ($day - $days)*100;
   $hours = $season_time - $hours;
   $str = "+".$hours." hour, -".$days." day";
+  $str = "-1 day";
 $sekundes = strtotime($str);
 
 //echo "<".$str.">  ";
@@ -88,9 +91,13 @@ $array_size = $i;
 $ampFlag = 0;
 $vid_sk = floor(($i-1)/144);
 $j = 0;
+
+$min = $datay[$array_size-1];
+$max = $datay[$array_size-1];
+
 for($cnt = 144; $cnt > 0; $cnt--)
 {
-  $vid = 0;
+  $vid = $datay[$array_size-$cnt*$vid_sk];
   for($cntv = 0; $cntv < $vid_sk; $cntv++)
   {
   if($datay[$array_size-$cnt*$vid_sk-$cntv] > $vid)
@@ -100,6 +107,19 @@ for($cnt = 144; $cnt > 0; $cnt--)
   $j++;
   if($vid > 100)
      $ampFlag = 1;
+
+ if($vid > $max)
+	  $max = $vid;
+  
+  if($vid < $min)
+	  $min = $vid;
+}
+
+if($min < 0)
+{
+	$corr = $min * -1;
+	for($cnt = 0; $cnt < 144; $cnt++)
+		$array[$cnt] = $array[$cnt] + $corr;
 }
 
 for($k=0; $k < $j; $k++)
@@ -135,44 +155,80 @@ for($k=0; $k < $j; $k++)
      //echo intval($val).">";
   $text = $text.intval($val)." ";
 }
-$text = $text.PHP_EOL;
+$duomenys = $text.PHP_EOL;
+//---------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------
 
+    include('var.php');
+    $servername = $SERVER_NAME;
+    $username = $SERVER_USER;
+    $password = $SERVER_PASSWORD;
+    $dbname = $SERVER_DBNAME;
+
+    $UserID = 1;
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        //die("Connection failed: " . $conn->connect_error);
+    } 
+$usr = "ramunas";
+
+//-----------------------Nuskaitom is duombazes------------------------------------------------
+$sql = "SELECT ID, Name FROM Users WHERE Name = '".$usr."'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0)
+{
+  $row = $result->fetch_assoc();
+  //echo $row["ID"]."-".$row["Name"];
+  $sql = "SELECT Address, Value, Date FROM Termometrai WHERE ID = ".$row["ID"];
+  $result = $conn->query($sql);
+
+  if ($result->num_rows > 0)
+  {
+     $num = 0;
+     while($row = $result->fetch_assoc())
+     {
+        $devices[$num] = $row["Address"]."|".$row["Value"]."|".date('Y-m-d H:i:s', $row["Date"]);
+        $num++;
+     }
+  }
+}
+$conn->close();
+//---------------------------------------------------------------------------------------------
 
 $Sl = "SLEGIS";
 $Pwr = "ADC-A1B2C3D4";
-
-$fp = @fopen("../vardenis/esp1.txt", 'r');
- while (($linex = fgets($fp)) !== false) {
- $line = explode("|", $linex);
-  
-  
-  if($line[0] == $Sl)//Slegis
-     $Sl = $line[1]; 
-  else if($line[0] == $Pwr)//Galia
-     $Pwr = $line[1];
-     
-}
-fclose($fp);
-
-$So = "28ff86c961170458";
-$Sz = "28ff77f862170410";
+$So = "28FF86C961170458";
+$Sz = "28FF77F862170410";
 $Lk = "28FFDF61C21603DE";
 $Sv = "28EE1EF31F16010E";
-$Rd = "28FF855FC21603AB";//Rad - "28EEDDF822160138";
+$Rd = "28FF855FC21603AB";//"28EEDDF822160138";//Rad - "";28FF855FC21603AB,
 $Ki = "28EE92811F1602A9";
-$Km = "cold-C7268D6A";
+$Kg = "28FF1742C01604F6";
+$Km = "COLD";
 $Bl = "28FF855FC21603AB";
-$Kl = "28FFC67FC216037C";//Kolektorius 28FF593763170442";
+$Kl = "28FF233863170408";//
+$Kt = "28FFC67FC216037C";
+
 $RdTime = "";
 
-$fp = @fopen("./esp1.txt", 'r');
- while (($linex = fgets($fp)) !== false) {
- $line = explode("|", $linex);
-  
-  if($line[0] == $So)//Siltnamio oras
-     $So = $line[1];
+$i = 0;
+ while ($i < count($devices)-1) {
+   
+    $line = explode("|", $devices[$i]);
+    $i++;
+    
+  if($line[0] == $Sl)//Slegis
+     $Sl = $line[1]; 
+  if($line[0] == $Pwr)//Galia
+     $Pwr = $line[1];
   if($line[0] == $Sz)//Siltnamio zeme
      $Sz = $line[1];
+  if($line[0] == $So)//Siltnamio oras
+     $So = $line[1];
   if($line[0] == $Lk)//Lauke
      $Lk = $line[1];
   if($line[0] == $Sv)//Svetaineje
@@ -184,16 +240,22 @@ $fp = @fopen("./esp1.txt", 'r');
      
   }
   if($line[0] == $Ki)//Katilo iseinamas
-     $Ki = $line[1];
+    { 
+      $Ki = $line[1];
+      $LastTime = $line[2];
+    }
   if($line[0] == $Km)//Kaminas
      $Km = $line[1]; 
   if($line[0] == $Bl)//Boileris
      $Bl = $line[1];
   if($line[0] == $Kl)//Kolektorius
      $Kl = $line[1]; 
+  if($line[0] == $Kg)//Katilo gristamas
+     $Kg = $line[1]; 
+  if($line[0] == $Kt)//Katilineje
+     $Kt= $line[1]; 
      
 }
-fclose($fp);
 
 $fp = @fopen("./duomenys/28EE1EF31F16010E", 'r');
 fseek($fp, -30000, SEEK_END);
@@ -202,21 +264,35 @@ fseek($fp, -30000, SEEK_END);
   
   if($line[1] > $sekundes)
   {
-    $Svv = $line[0];
+    $Svv = $Sv-$line[0];
+	if(abs($Svv) >= 10)
+		$Svv = number_format($Svv, 0);
+	else
+		$Svv = number_format($Svv, 1);
+	
+	if($Svv >=0)
+		$Svv = "+".$Svv;
     break;
   }
      
 }
 fclose($fp);
 
-$fp = @fopen("./duomenys/28FF855FC21603AB", 'r');//rad - "./duomenys/28EEDDF822160138"
+$fp = @fopen("./duomenys/28FF855FC21603AB", 'r');//rad - "./duomenys/"28FF855FC21603AB
 fseek($fp, -30000, SEEK_END);
  while (($linex = fgets($fp)) !== false) {
  $line = explode("|", $linex);
   
   if($line[1] > $sekundes)
   {
-    $Rdv = $line[0];
+    $Rdv = $Rd-$line[0];
+	if(abs($Rdv) >= 10)
+		$Rdv = number_format($Rdv, 0);
+	else
+		$Rdv = number_format($Rdv, 1);
+	
+	if($Rdv >= 0)
+		$Rdv = "+".$Rdv;
     break;
   }
      
@@ -226,6 +302,19 @@ fclose($fp);
 //$time = $time_end - $time_start;
 //°
 //$text = $text.$So.PHP_EOL.$Sz.PHP_EOL.$Sl.PHP_EOL.$Lk.PHP_EOL.$Sv.PHP_EOL.$Rd.PHP_EOL.$Ki.PHP_EOL.$Km.PHP_EOL.$Pwr/*$Bl*/.PHP_EOL.$Kl.PHP_EOL.$Svv.PHP_EOL.$Rdv.PHP_EOL.$RdTime.PHP_EOL;
-$text = "L:".number_format($Lk, 1)." S:".number_format($Sv, 1)." R:".number_format($Rd, 1)." G:".number_format($Pwr, 0)."W";
+if($Ki > 82)
+  $warning = "1";
+else
+  $warning = "0";
+  
+$text = number_format($Sv, 1)."°C ".$Svv."°C".PHP_EOL.number_format($Rd, 1)."°C ".$Rdv."°C ".number_format($Ki, 1)."°C|";
+$text = $text.number_format($Sl,0)."hPa D:".number_format($Km, 0)." K:".number_format($Kl, 1). " S:".number_format($So,1)." ".
+number_format($Pwr/1000*3, 1)."kW G:".number_format($Kg, 1)."C K:".number_format($Kt, 1)."C|";
+$text = $text.$duomenys."|";
+$text = $text.number_format($max,1)." ".number_format($min,1)."|";
+$text = $text.number_format($Lk, 1)."°C|";
+$text = $text.(strtotime($LastTime))."|";//-3600*$hours
+$text = $text.$warning;
+
 echo $text;
 ?>

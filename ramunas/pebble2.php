@@ -158,7 +158,7 @@ $So = "28ff86c961170458";
 $Sz = "28ff77f862170410";
 $Lk = "28FFDF61C21603DE";
 $Sv = "28EE1EF31F16010E";
-$Rd = "28EEDDF822160138";//Boil - "28FF855FC21603AB";//Rad - "28EEDDF822160138";
+$Rd = "28FF855FC21603AB";//Rad - "28EEDDF822160138";
 $Ki = "28EE92811F1602A9";
 $Km = "cold-C7268D6A";
 $Bl = "28FF855FC21603AB";
@@ -209,7 +209,7 @@ fseek($fp, -30000, SEEK_END);
 }
 fclose($fp);
 
-$fp = @fopen("./duomenys/28EEDDF822160138", 'r');//rad - "./duomenys/28EEDDF822160138" //boil - 28FF855FC21603AB
+$fp = @fopen("./duomenys/28FF855FC21603AB", 'r');//rad - "./duomenys/28EEDDF822160138"
 fseek($fp, -30000, SEEK_END);
  while (($linex = fgets($fp)) !== false) {
  $line = explode("|", $linex);
@@ -222,13 +222,12 @@ fseek($fp, -30000, SEEK_END);
      
 }
 fclose($fp);
-//$time_end = microtime_float();
-//$time = $time_end - $time_start;
-
 //$fi = new FilesystemIterator("/home/pi/motion/images", FilesystemIterator::SKIP_DOTS);
 //printf("There were %d Files", iterator_count($fi));
-
-$text = $text./*$So*/$Pwr.PHP_EOL.$Sz.PHP_EOL.$Sl.PHP_EOL.$Lk.PHP_EOL.$Sv.PHP_EOL.$Rd.PHP_EOL.$Ki.PHP_EOL.$Km.PHP_EOL.$Bl.PHP_EOL.$Kl.PHP_EOL.$Svv.PHP_EOL.$Rdv.PHP_EOL.$RdTime.PHP_EOL;
-
+//$time_end = microtime_float();
+//$time = $time_end - $time_start;
+//°
+//$text = $text.$So.PHP_EOL.$Sz.PHP_EOL.$Sl.PHP_EOL.$Lk.PHP_EOL.$Sv.PHP_EOL.$Rd.PHP_EOL.$Ki.PHP_EOL.$Km.PHP_EOL.$Pwr/*$Bl*/.PHP_EOL.$Kl.PHP_EOL.$Svv.PHP_EOL.$Rdv.PHP_EOL.$RdTime.PHP_EOL;
+$text = "L:".number_format($Lk, 1)." S:".number_format($Sv, 1)." R:".number_format($Rd, 1)." G:".number_format($Pwr, 0)."W";
 echo $text;
 ?>

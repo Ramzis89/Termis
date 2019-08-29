@@ -9,7 +9,6 @@ session_start();
 
     html { 
         height:100%;
-        background: url('\\background.jpg') no-repeat center center fixed; 
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -20,7 +19,6 @@ session_start();
     background-color: #9100;
     height: 575px;
     width: 975px;
-    background-image: background.jpg);
     top: auto;
     margin: -8px;
     
@@ -30,7 +28,7 @@ body {
 }
 #pass {
     background-color:rgba(115, 110, 110, 0);
-    color:white;
+    color:#545353;
     border: none;
     outline:none;
     height:45px;
@@ -185,7 +183,7 @@ echo "<br>
     <div class=\"term\">
     
         <form name=\"form1\" action=\"index.php\" method=\"post\">
-            <font color=white><b>Vartotojas:<br>
+            <font color=#545353><b>Vartotojas:<br>
             <input name=\"usr\" type=\"text\" id=pass value=\"".$usr1."\">
             <br>Slaptažodis:<br></b></font>
             <input name=\"psw\" type=\"password\" id=pass><br>

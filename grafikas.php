@@ -11,7 +11,6 @@ body {
     //background-color: #ccffd1;
 }
     html { 
-        background: url('background.jpg') no-repeat center center fixed; 
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -22,7 +21,6 @@ body {
     background-color: #9100;
     height: 575px;
     width: 975px;
-    background-image: background.jpg);
     top: auto;
     margin: -8px;
     
@@ -34,7 +32,7 @@ input[type=submit]:hover {
 input[type=submit] {
     width: 110px;
     background-color: #808080;
-    color: white;
+    color: #545353;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
@@ -44,7 +42,7 @@ input[type=submit] {
 
 input[type=datetime-local], select {
     width: 220px;
-    color: white;
+    color: #545353;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -58,7 +56,7 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #2f6a31;
+    background-color: #77D2FF;
 }
 
 li {
@@ -76,12 +74,12 @@ li a {
 }
 
 li a:hover {
-    background-color: #1f4720;
+    background-color: #27B7FE;
 }
 
 #pass1 {
     background-color:rgba(115, 110, 110, 0);
-    color:white;
+    color:#545353;
     border: none;
     outline:none;
     width: 250px;
@@ -91,7 +89,7 @@ li a:hover {
 
 #pass2 {
     background-color:rgba(115, 110, 110, 0);
-    color:white;
+    color:#545353;
     border: none;
     outline:none;
     width: 180px;
@@ -238,14 +236,14 @@ if($today == 1)
  <table width=\"100%\">
  <tr>
  <th width=\"10%\" align=\"left\" valign=\"top\">
- <font color=white>".$time_now."</font>";
+ <font color=#545353>".$time_now."</font>";
  
  echo "
- <font color=white><nobr>Nuo: </font><input type=\"datetime-local\" value= \"".$start."\" name=\"start\" id=pass1 style=\"background-color: #2D70B4\"></nobr>
- <br><font color=white><nobr>Iki:&nbsp;&nbsp;&nbsp;</font><input type=\"datetime-local\" value= \"".$end."\" name=\"end\" id=pass1 style=\"background-color: #2D70B4\"></nobr>
+ <font color=#545353><nobr>Nuo: </font><input type=\"datetime-local\" value= \"".$start."\" name=\"start\" id=pass1 style=\"background-color: #DBEFFF\"></nobr>
+ <br><font color=#545353></font><nobr>Iki:&nbsp;&nbsp;&nbsp;</font><input type=\"datetime-local\" value= \"".$end."\" name=\"end\" id=pass1 style=\"background-color: #DBEFFF\"></nobr>
  
- <br><nobr><input type=\"checkbox\" name=\"unify\" value=\"1\" ".$unify_checked."><font color=white>Suvienodinti y ašis</font></nobr>
- <br><nobr><input type=\"checkbox\" name=\"today\" value=\"1\" ".$today_checked."><font color=white>Šiandien</font></nobr><hr>";
+ <br><nobr><input type=\"checkbox\" name=\"unify\" value=\"1\" ".$unify_checked."><font color=#545353>Suvienodinti y ašis</font></nobr>
+ <br><nobr><input type=\"checkbox\" name=\"today\" value=\"1\" ".$today_checked."><font color=#545353>Šiandien</font></nobr><hr>";
 
  $params_i = 0;
  $params = "";
@@ -278,7 +276,7 @@ if($today == 1)
           $checked = "";
         }
       }
-      echo "<nobr> <input type=\"checkbox\" name=\"failas".$j."\" value=\"".$Device[0]."\" ".$checked."><font color=white>".$Device[1]."</font></nobr><br>";
+      echo "<nobr> <input type=\"checkbox\" name=\"failas".$j."\" value=\"".$Device[0]."\" ".$checked."><font color=#545353>".$Device[1]."</font></nobr><br>";
     }
  }
  echo "<hr><input type=\"submit\" value=\"Rodyti\">

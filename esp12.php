@@ -8,7 +8,6 @@ session_start();
 { margin: 0; padding: 0; }
 
     html { 
-        background: url('background.jpg') no-repeat center center fixed; 
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -19,7 +18,6 @@ session_start();
     background-color: #9100;
     height: 575px;
     width: 975px;
-    background-image: background.jpg);
     top: auto;
     margin: -8px;
     
@@ -69,12 +67,12 @@ th, td {
     padding: 6px;
 }
 
-tr:nth-child(even) {background: #4CAF50}
-tr:nth-child(odd) {background: #449d48}
+tr:nth-child(even) {background: #F5F5F5}
+tr:nth-child(odd) {background: #EEEEEE}
 
 
 th {
-    color: white;
+    color: #545353;
 }
 
 #resize{
@@ -83,7 +81,7 @@ th {
 
 #pass2 {
     background-color:rgba(115, 110, 110, 0);
-    color:white;
+    color:#545353;
     border: none;
     outline:none;
     width: 120px;
@@ -92,7 +90,7 @@ th {
 }
 #time1 {
     background-color:rgba(115, 110, 110, 0);
-    color:white;
+    color:#545353;
     border: none;
     outline:none;
     width: 80px;
@@ -106,7 +104,7 @@ th {
 
 #pass1 {
     background-color:rgba(115, 110, 110, 0);
-    color:white;
+    color:#545353;
     border: none;
     outline:none;
     width: 50px;
@@ -123,7 +121,7 @@ th {
 }
 #custtext {
     background-color:rgba(115, 110, 110, 0);
-    color:white;
+    color:#545353;
     border: none;
     outline:none;
     height:30px;
@@ -143,7 +141,7 @@ th {
 
 #pass {
     background-color:rgba(115, 110, 110, 0);
-    color:white;
+    color:#545353;
     border: none;
     outline:none;
     height:30px;
@@ -181,7 +179,7 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #2f6a31;
+    background-color: #77D2FF;
 }
 
 li {
@@ -199,7 +197,7 @@ li a {
 }
 
 li a:hover {
-    background-color: #1f4720;
+    background-color: #27B7FE;
 }
 
 </style>
@@ -595,7 +593,7 @@ if(strlen($delete) > 0)
     $selN = "selected";
 
     
-  echo "</table>  <br> <br><font color=white><b>
+  echo "</table>  <br> <br><font color=#545353><b>
   Pasirinktinių duomenų rašymas į failą
  <select name=\"CustomEnable\" id=pass2 style=\"background-color: #2D70B4\" title=\""."http://".$_SERVER['HTTP_HOST']."/".$usr."/CustomOut.txt\" >
     <option value=\"T\" ".$selT.">Įjungta</option>
@@ -606,7 +604,7 @@ if(strlen($delete) > 0)
    <br><input type=\"submit\" value=\"Išsaugoti\">
          </form>
                 <form action=\"./".$esp12."\">
-                <font color=white><b>
+                <font color=#545353><b>
       Pakeisti slaptažodį:<br>
      Senas slaptažodis: <input type=\"password\" name=\"oldpsw\" id=pass>
      Naujas slaptažodis: <input type=\"password\" name=\"newpsw1\" id=pass> pakartoti naują: <input type=\"password\" name=\"newpsw2\" id=pass>
@@ -615,7 +613,7 @@ if(strlen($delete) > 0)
         
    if($msg === "1")
    {
-     echo "<h1><font color=white>Naujas slaptažodis išsaugotas!</font></h1>";
+     echo "<h1><font color=#545353>Naujas slaptažodis išsaugotas!</font></h1>";
    }
    
 
